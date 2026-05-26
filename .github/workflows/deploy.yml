@@ -1,0 +1,29 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      
+      - name: Set up Node.js environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      
+      - name: Install local dependencies
+        run: npm install
+      
+      - name: Run automated test script
+        run: npm test
+      
+      - name: Build Docker image
+        run: docker build -t my-devops-app:latest .
+      
+      - name: Log success
+        run: echo "Code tested and Docker image built successfully!"
