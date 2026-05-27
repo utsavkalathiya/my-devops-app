@@ -1,15 +1,13 @@
-const express = require('express');
-const app = express();
-const PORT = process.env.PORT || 3000;
+// Simple test file
+const assert = require('assert');
 
-app.get('/', (req, res) => {
-  res.send(`
-    <h1>Welcome to DevOps!</h1>
-    <p>This app is running in a Docker container.</p>
-    <p>Version: 1.0</p>
-  `);
-});
+// Test 1: Check if app file exists
+try {
+  require('./app.js');
+  console.log('✓ App loads successfully');
+} catch (err) {
+  console.error('✗ App failed to load');
+  process.exit(1);
+}
 
-app.listen(PORT, () => {
-  console.log(`App running on port ${PORT}`);
-});
+console.log('All tests passed!');
