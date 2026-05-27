@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
   res.send(`
@@ -10,6 +9,5 @@ app.get('/', (req, res) => {
   `);
 });
 
-app.listen(PORT, () => {
-  console.log(`App running on port ${PORT}`);
-});
+// Export ONLY the app setup, don't listen here
+module.exports = app;
