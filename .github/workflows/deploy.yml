@@ -2,7 +2,7 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
   test-and-build:
@@ -10,15 +10,15 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-
+      
       - name: Set up Node.js environment
         uses: actions/setup-node@v3
         with:
-          node-version: "20"
-
+          node-version: '20'
+      
       - name: Install local dependencies
         run: npm install
-
+      
       - name: Run automated test script
         run: npm test
 
@@ -27,7 +27,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          aws-region: us-east-1 # <-- double check that this matches your ECR and ECS cluster region!
 
       - name: Log in to Amazon ECR
         id: login-ecr
@@ -41,3 +41,7 @@ jobs:
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+      - name: Force AWS ECS Redeployment
+        run: |
+          aws ecs update-service --cluster my-devops-cluster01 --service my-web-service --force-new-deployment
