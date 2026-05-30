@@ -4,7 +4,7 @@ const app = express();
 app.get("/", (req, res) => {
   res.send(`
     <h1>Welcome to DevOps!</h1>
-    <p>This app is not running in a Docker container.</p>
+    <p>Welcome to DevOps! My Fully Automated Pipeline is Live!</p>
     <p>Version: 1.0</p>
   `);
 });
