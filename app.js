@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <title>DevOps Pipeline</title>
-      <link rel="stylesheet" href="/public/app.css" />
+      <link rel="stylesheet" href="/app.css" />
     </head>
     <body>
       <div class="container">
